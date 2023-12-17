@@ -1,9 +1,8 @@
+local nougat = require("nougat")
 local core = require("nougat.core")
 local Bar = require("nougat.bar")
 local Item = require("nougat.item")
 local sep = require("nougat.separator")
-local bar_util = require("nougat.bar.util")
-local color = require("nougat.color").get()
 
 local nut = {
   buf = {
@@ -29,14 +28,14 @@ local nut = {
   truncation_point = require("nougat.nut.truncation_point").create,
 }
 
--- create items
--- item - mode
+---@type nougat.color
+local color = require("nougat.color").get()
+
 local mode = nut.mode({
   sep_left = sep.left_half_circle_solid(true),
   sep_right = sep.right_half_circle_solid(true),
 })
 
--- item - filename
 local filename = (function()
   local item = Item({
     prepare = function(_, ctx)
@@ -136,14 +135,17 @@ local function paired_space(item)
   })
 end
 
-local git_branch = nut.git.branch({
+local stl = Bar("statusline")
+stl:add_item(mode)
+stl:add_item(sep.space())
+stl:add_item(nut.git.branch({
   hl = { bg = color.magenta, fg = color.bg },
   sep_left = sep.left_half_circle_solid(true),
   prefix = " ",
   sep_right = sep.right_half_circle_solid(true),
-})
-
-local git_status = nut.git.status.create({
+}))
+stl:add_item(sep.space())
+local gitstatus = stl:add_item(nut.git.status.create({
   hl = { fg = color.bg },
   sep_left = sep.left_half_circle_solid(true),
   content = {
@@ -171,14 +173,8 @@ local git_status = nut.git.status.create({
     }),
   },
   sep_right = sep.right_half_circle_solid(true),
-})
-
-local stl = Bar("statusline")
-stl:add_item(mode)
-stl:add_item(sep.space())
-stl:add_item(git_branch)
-stl:add_item(sep.space())
-stl:add_item(paired_space(git_status))
+}))
+stl:add_item(paired_space(gitstatus))
 stl:add_item(filename)
 stl:add_item(sep.space())
 stl:add_item(nut.spacer())
@@ -213,7 +209,39 @@ stl_inactive:add_item(nut.spacer())
 stl_inactive:add_item(ruler)
 stl_inactive:add_item(sep.space())
 
-bar_util.set_statusline(function(ctx)
+nougat.set_statusline(function(ctx)
   return ctx.is_focused and stl or stl_inactive
 end)
 
+local tal = Bar("tabline")
+
+tal:add_item(nut.tab.tablist.tabs({
+  active_tab = {
+    hl = { bg = color.bg, fg = color.blue },
+    prefix = " ",
+    suffix = " ",
+    content = {
+      nut.tab.tablist.icon({ suffix = " " }),
+      nut.tab.tablist.label({}),
+      nut.tab.tablist.modified({ prefix = " ", config = { text = "●" } }),
+      nut.tab.tablist.close({ prefix = " ", config = { text = "󰅖" } }),
+    },
+    sep_left = sep.left_half_circle_solid({ bg = "bg", fg = color.bg }),
+    sep_right = sep.right_half_circle_solid({ bg = "bg", fg = color.bg }),
+  },
+  inactive_tab = {
+    hl = { bg = color.bg2, fg = color.fg2 },
+    prefix = " ",
+    suffix = " ",
+    content = {
+      nut.tab.tablist.icon({ suffix = " " }),
+      nut.tab.tablist.label({}),
+      nut.tab.tablist.modified({ prefix = " ", config = { text = "●" } }),
+      nut.tab.tablist.close({ prefix = " ", config = { text = "󰅖" } }),
+    },
+    sep_left = sep.left_half_circle_solid({ bg = "bg", fg = color.bg2 }),
+    sep_right = sep.right_half_circle_solid({ bg = "bg", fg = color.bg2 }),
+  },
+}))
+
+nougat.set_tabline(tal)
