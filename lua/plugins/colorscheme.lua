@@ -4,16 +4,16 @@ return {
   {
     "folke/tokyonight.nvim",
     lazy = true,
-    opts = { 
-      style = "moon" 
+    opts = {
+      style = "moon",
     },
   },
 
   -- catppuccin
-  { 
-    "catppuccin/nvim", 
+  {
+    "catppuccin/nvim",
     lazy = true,
-    name = "catppuccin", 
+    name = "catppuccin",
     opts = {
       flavour = "mocha", -- latte, frappe, macchiato, mocha
     }

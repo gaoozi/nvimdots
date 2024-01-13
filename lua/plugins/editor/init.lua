@@ -12,6 +12,20 @@ return {
     end,
   },
 
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    init = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+    end,
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    }
+  },
+
   -- Navigate your code with search label
   {
     "folke/flash.nvim",
@@ -43,10 +57,10 @@ return {
 
   -- Fuzzy finder.
   {
-    "nvim-telescope/telescope.nvim", 
+    "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
     version = false,
-    dependencies = { 
+    dependencies = {
       "nvim-lua/plenary.nvim",
       "folke/trouble.nvim",
       "nvim-telescope/telescope-ui-select.nvim",
