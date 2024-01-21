@@ -12,9 +12,20 @@ return {
     end,
   },
 
+  -- Statusline
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    event = "VeryLazy",
+    config = function()
+      require("plugins.ui.lualine")
+    end
+  },
+
   -- Hyperextensible plugin for Neovim's 'statusline', 'tabline' and 'winbar'.
   {
     "MunifTanjim/nougat.nvim",
+    enabled = false,
     event = "VeryLazy",
     config = function()
       require("plugins.ui.nougat")
