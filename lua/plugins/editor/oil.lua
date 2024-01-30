@@ -27,7 +27,6 @@ oil.setup({
     ["gd"] = {
       desc = "toggle detail view",
       callback = function()
-        local oil = require("oil")
         local config = require("oil.config")
         if #config.columns == 1 then
           oil.set_columns({ "icon", "permissions", "size", "mtime" })
