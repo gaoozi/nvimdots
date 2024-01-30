@@ -1,4 +1,3 @@
-
 local utils = require("utils")
 
 local map = utils.safe_keymap_set
@@ -30,8 +29,8 @@ map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
 map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
 -- Faster scrolling
-map('n', '<c-e>', '3<c-e>')
-map('n', '<c-y>', '3<c-y>')
+map("n", "<c-e>", "3<c-e>")
+map("n", "<c-y>", "3<c-y>")
 
 -- Buffers
 map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })

@@ -1,4 +1,3 @@
-
 local function setup()
   --local rt = require("rust-tools")
 
@@ -15,12 +14,12 @@ local function setup()
 
   return {
     settings = {
-      ['rust-analyzer'] = {
+      ["rust-analyzer"] = {
         diagnostics = {
-          enable = false;
-        }
-      }
-    }
+          enable = false,
+        },
+      },
+    },
   }
 end
 

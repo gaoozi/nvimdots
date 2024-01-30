@@ -1,4 +1,3 @@
-
 return {
   -- tokyonight
   {
@@ -16,6 +15,6 @@ return {
     name = "catppuccin",
     opts = {
       flavour = "mocha", -- latte, frappe, macchiato, mocha
-    }
+    },
   },
 }

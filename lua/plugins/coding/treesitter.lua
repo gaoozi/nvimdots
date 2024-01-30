@@ -1,4 +1,4 @@
-local check_file_size = function(lang, bufnr)
+local check_file_size = function(_, bufnr)
   return vim.api.nvim_buf_line_count(bufnr) > 100000
 end
 

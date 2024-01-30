@@ -1,4 +1,3 @@
-
 local actions = require("telescope.actions")
 
 local open_with_trouble = function(...)
@@ -10,13 +9,13 @@ end
 local find_files_no_ignore = function()
   local action_state = require("telescope.actions.state")
   local line = action_state.get_current_line()
-  require("telescope.builtin").find_files({no_ignore=true, default_text = line})
+  require("telescope.builtin").find_files({ no_ignore = true, default_text = line })
   -- Util.telescope("find_files", { no_ignore = true, default_text = line })()
 end
 local find_files_with_hidden = function()
   local action_state = require("telescope.actions.state")
   local line = action_state.get_current_line()
-  require("telescope.builtin").find_files({hidden=true, default_text = line})
+  require("telescope.builtin").find_files({ hidden = true, default_text = line })
   -- Util.telescope("find_files", { hidden = true, default_text = line })()
 end
 
@@ -55,18 +54,17 @@ require("telescope").setup({
   },
   extensions = {
     fzf = {
-      fuzzy = true,                    -- false will only do exact matching
-      override_generic_sorter = true,  -- override the generic sorter
-      override_file_sorter = true,     -- override the file sorter
-      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+      fuzzy = true, -- false will only do exact matching
+      override_generic_sorter = true, -- override the generic sorter
+      override_file_sorter = true, -- override the file sorter
+      case_mode = "smart_case", -- or "ignore_case" or "respect_case"
     },
-    ['ui-select'] = {
-      require('telescope.themes').get_cursor {},
+    ["ui-select"] = {
+      require("telescope.themes").get_cursor({}),
     },
   },
 })
 
-require('telescope').load_extension 'fzf'
-require('telescope').load_extension 'ui-select'
-require('telescope').load_extension 'noice'
-
+require("telescope").load_extension("fzf")
+require("telescope").load_extension("ui-select")
+require("telescope").load_extension("noice")

@@ -1,8 +1,8 @@
 return {
   -- Auto completion
   {
-    'L3MON4D3/LuaSnip',
-    event = 'InsertEnter',
+    "L3MON4D3/LuaSnip",
+    event = "InsertEnter",
     opts = {
       history = true,
       delete_check_events = "TextChanged",
@@ -13,25 +13,48 @@ return {
         function()
           return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
         end,
-        expr = true, silent = true, mode = "i",
+        expr = true,
+        silent = true,
+        mode = "i",
       },
-      { "<tab>", function() require("luasnip").jump(1) end, mode = "s" },
-      { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
+      {
+        "<tab>",
+        function()
+          require("luasnip").jump(1)
+        end,
+        mode = "s",
+      },
+      {
+        "<s-tab>",
+        function()
+          require("luasnip").jump(-1)
+        end,
+        mode = { "i", "s" },
+      },
     },
   },
   {
-    'hrsh7th/nvim-cmp',
-    event = 'InsertEnter',
+    "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
     dependencies = {
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      'saadparwaiz1/cmp_luasnip',
-      'petertriho/cmp-git',
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "saadparwaiz1/cmp_luasnip",
+      "petertriho/cmp-git",
     },
     config = function()
       require("plugins.coding.cmp")
-    end
+    end,
+  },
+
+  -- Format
+  {
+    "stevearc/conform.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("plugins.coding.conform")
+    end,
   },
 
   -- Auto pairs
@@ -104,11 +127,11 @@ return {
     build = ":TSUpdate",
     -- event = { "LazyFile", "VeryLazy" },
     dependencies = {
-      'windwp/nvim-ts-autotag', -- Automatically end & rename tags
-      'nvim-treesitter/playground',
+      "windwp/nvim-ts-autotag", -- Automatically end & rename tags
+      "nvim-treesitter/playground",
     },
     config = function()
       require("plugins.coding.treesitter")
-    end
+    end,
   },
 }

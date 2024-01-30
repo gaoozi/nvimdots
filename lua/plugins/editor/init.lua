@@ -4,8 +4,20 @@ return {
     "stevearc/oil.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = {
-      { "-", function() require("oil").open_float() end, desc = "oil: open parent directory" },
-      { "_", function() require("oil").open_float(vim.fn.getcwd()) end, desc = "oil: open cwd"}
+      {
+        "-",
+        function()
+          require("oil").open_float()
+        end,
+        desc = "oil: open parent directory",
+      },
+      {
+        "_",
+        function()
+          require("oil").open_float(vim.fn.getcwd())
+        end,
+        desc = "oil: open cwd",
+      },
     },
     config = function()
       require("plugins.editor.oil")
@@ -23,23 +35,23 @@ return {
       -- your configuration comes here
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
-    }
+    },
   },
 
   -- Navigate your code with search label
-  {
-    "folke/flash.nvim",
-    event = "VeryLazy",
-    vscode = true,
-    opts = {},
-    keys = {
-      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-      { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
-    },
-  },
+  --{
+  --  "folke/flash.nvim",
+  --  event = "VeryLazy",
+  --  vscode = true,
+  --  opts = {},
+  --  keys = {
+  --    { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+  --    { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+  --    { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+  --    { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+  --    { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+  --  },
+  --},
 
   -- Session manager
   {
@@ -49,9 +61,27 @@ return {
       options = vim.opt.sessionoptions:get(), -- sessionoptions used for saving
     },
     keys = {
-      { "<leader>qs", function() require("persistence").load() end, desc = "Restore Session" },
-      { "<leader>ql", function() require("persistence").load({ last = true }) end, desc = "Restore Last Session" },
-      { "<leader>qd", function() require("persistence").stop() end, desc = "Don't Save Current Session" },
+      {
+        "<leader>qs",
+        function()
+          require("persistence").load()
+        end,
+        desc = "Restore Session",
+      },
+      {
+        "<leader>ql",
+        function()
+          require("persistence").load({ last = true })
+        end,
+        desc = "Restore Last Session",
+      },
+      {
+        "<leader>qd",
+        function()
+          require("persistence").stop()
+        end,
+        desc = "Don't Save Current Session",
+      },
     },
   },
 
@@ -101,6 +131,6 @@ return {
     },
     config = function()
       require("plugins.editor.telescope")
-    end
+    end,
   },
 }

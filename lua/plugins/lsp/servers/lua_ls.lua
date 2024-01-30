@@ -1,4 +1,3 @@
-
 return {
   settings = {
     Lua = {
@@ -7,6 +6,9 @@ return {
       },
       completion = {
         callSnippet = "Replace",
+      },
+      format = {
+        enable = false,
       },
     },
   },

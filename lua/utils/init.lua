@@ -1,4 +1,3 @@
-
 local M = {}
 
 -- Wrapper around vim.keymap.set that will

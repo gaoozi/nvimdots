@@ -1,7 +1,7 @@
 return {
   --  Automatic package management
   {
-    'williamboman/mason.nvim',
+    "williamboman/mason.nvim",
     cmd = "Mason",
     keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
     build = ":MasonUpdate",
@@ -12,7 +12,7 @@ return {
       },
     },
     config = function(_, opts)
-      require('mason').setup(opts)
+      require("mason").setup(opts)
       local mr = require("mason-registry")
 
       mr:on("package:install:success", function()
@@ -79,19 +79,33 @@ return {
     config = function(_, opts)
       -- keymaps
       local function lsp_keymaps(bufnr)
-        local builtin = require 'telescope.builtin'
+        local builtin = require("telescope.builtin")
 
         local map_opts = { buffer = bufnr, silent = true }
-        vim.keymap.set('n', 'gd', function() builtin.lsp_definitions({ reuse_win = true }) end, map_opts)
-        vim.keymap.set('n', 'gI', function() builtin.lsp_implementations({ reuse_win = true }) end, map_opts)
-        vim.keymap.set('n', 'gy', function() builtin.lsp_type_definitions({ reuse_win = true }) end, map_opts)
-        vim.keymap.set('n', 'gr', builtin.lsp_references, map_opts)
-        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, map_opts)
-        vim.keymap.set('n', 'K', vim.lsp.buf.hover, map_opts)
-        vim.keymap.set('n', 'gK', vim.lsp.buf.signature_help, map_opts)
-        vim.keymap.set('i', '<c-k>', vim.lsp.buf.signature_help, map_opts)
-        vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, map_opts)
-        vim.keymap.set({ 'n', 'v' }, '<leader>cA', function()
+        vim.keymap.set("n", "gd", function()
+          builtin.lsp_definitions({ reuse_win = true })
+        end, map_opts)
+        vim.keymap.set("n", "gI", function()
+          builtin.lsp_implementations({ reuse_win = true })
+        end, map_opts)
+        vim.keymap.set("n", "gy", function()
+          builtin.lsp_type_definitions({ reuse_win = true })
+        end, map_opts)
+        vim.keymap.set("n", "gr", builtin.lsp_references, map_opts)
+        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, map_opts)
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, map_opts)
+        vim.keymap.set("n", "gK", vim.lsp.buf.signature_help, map_opts)
+        vim.keymap.set("i", "<c-k>", vim.lsp.buf.signature_help, map_opts)
+        vim.keymap.set("n", "<leader>ff", function()
+          local conform = require("conform")
+          conform.format({
+            bufnr = bufnr,
+            async = false,
+            lsp_fallback = true,
+          })
+        end, { desc = "Format" })
+        vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, map_opts)
+        vim.keymap.set({ "n", "v" }, "<leader>cA", function()
           vim.lsp.buf.code_action({
             context = {
               only = {
@@ -124,8 +138,16 @@ return {
       local servers = opts.servers
       local function setup(server)
         local server_opts = vim.tbl_deep_extend("force", {
-          on_attach = function(_, bufnr)
+          on_attach = function(client, bufnr)
             lsp_keymaps(bufnr)
+
+            if vim.fn.has("nvim-0.8") == 1 then
+              client.server_capabilities.documentFormattingProvider = false
+              client.server_capabilities.documentRangeFormattingProvider = false
+            else
+              client.resolved_capabilities.document_formatting = false
+              client.resolved_capabilities.document_range_formatting = false
+            end
           end,
           capabilities = vim.deepcopy(capabilities),
         }, servers[server] or {})
@@ -144,8 +166,8 @@ return {
       for server, server_opts in pairs(servers) do
         if server_opts then
           server_opts = server_opts == true and {} or server_opts
-          -- run manual setup 
-          -- 1. if mason=false 
+          -- run manual setup
+          -- 1. if mason=false
           -- 2. if this is a server that cannot be installed with mason-lspconfig
           if server_opts.mason == false or not vim.tbl_contains(all_mslp_servers, server) then
             setup(server)
@@ -159,6 +181,6 @@ return {
       if have_mason then
         mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })
       end
-    end
+    end,
   },
 }

@@ -3,7 +3,7 @@ return {
     css = {
       lint = {
         -- Do not warn for Tailwind's @apply rule
-        unknownAtRules = 'ignore',
+        unknownAtRules = "ignore",
       },
     },
   },
