@@ -4,29 +4,24 @@ end
 
 ---@diagnostic disable-next-line: missing-fields
 require("nvim-treesitter.configs").setup({
-  highlight = {
-    enable = true,
-    use_languagetree = true,
-    disable = check_file_size,
-  },
-  indent = {
-    enable = true,
-  },
-  playground = {
-    enable = false,
-    disable = {},
-    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-    persist_queries = false, -- Whether the query persists across vim sessions
-  },
-  autotag = {
-    enable = true,
-    disable = check_file_size,
-  },
   ensure_installed = {
     "bash",
     "c",
     "css",
+    "cmake",
+    "cpp",
+    "comment",
     "diff",
+    "dockerfile",
+    "git_config",
+    "git_rebase",
+    "gitattributes",
+    "gitcommit",
+    "gitignore",
+    "go",
+    "gomod",
+    "gosum",
+    "gowork",
     "html",
     "javascript",
     "jsdoc",
@@ -35,6 +30,7 @@ require("nvim-treesitter.configs").setup({
     "lua",
     "luadoc",
     "luap",
+    "make",
     "markdown",
     "markdown_inline",
     "python",
@@ -50,5 +46,33 @@ require("nvim-treesitter.configs").setup({
     "sql",
     "rust",
     "yaml",
+    "zig",
+  },
+  highlight = {
+    enable = true,
+    use_languagetree = true,
+    disable = check_file_size,
+  },
+  indent = {
+    enable = true,
+  },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "<CR>",
+      node_incremental = "<CR>",
+      node_decremental = "<BS>",
+      scope_incremental = "<TAB>",
+    },
+  },
+  playground = {
+    enable = false,
+    disable = {},
+    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+    persist_queries = false, -- Whether the query persists across vim sessions
+  },
+  autotag = {
+    enable = true,
+    disable = check_file_size,
   },
 })

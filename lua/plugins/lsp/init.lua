@@ -7,8 +7,18 @@ return {
     build = ":MasonUpdate",
     opts = {
       ensure_installed = {
-        "stylua",
-        "shfmt",
+        -- formatter
+        "stylua", -- lua
+        "shfmt",  -- shell
+        "black",  -- python
+        "prettier", -- vue, ts, html, css, scss, json, jsx, markdown yaml...
+        "gofumpt", -- go
+        "goimports", -- format imports
+        -- linter
+        "ruff",         -- python
+        "markdownlint", -- markdown
+        -- utility
+        "isort",  -- python: sort imports 
       },
     },
     config = function(_, opts)

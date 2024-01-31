@@ -11,13 +11,13 @@ return {
     },
     keys = {
       {
-        "<leader>fE",
+        "<leader>fe",
         function()
           require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() })
         end,
         desc = "Explorer NeoTree (cwd)",
       },
-      { "<leader>E", "<leader>fE", desc = "Explorer NeoTree (cwd)", remap = true },
+      { "<leader>e", "<leader>fe", desc = "Explorer NeoTree (cwd)", remap = true },
       {
         "<leader>ge",
         function()
@@ -37,6 +37,7 @@ return {
       vim.cmd([[Neotree close]])
     end,
     opts = {
+      close_if_last_window = true,
       sources = { "filesystem", "buffers", "git_status", "document_symbols" },
       filesystem = {
         follow_current_file = { enabled = true },
