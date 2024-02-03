@@ -9,16 +9,16 @@ return {
       ensure_installed = {
         -- formatter
         "stylua", -- lua
-        "shfmt",  -- shell
-        "black",  -- python
+        "shfmt", -- shell
+        "black", -- python
         "prettier", -- vue, ts, html, css, scss, json, jsx, markdown yaml...
         "gofumpt", -- go
         "goimports", -- format imports
         -- linter
-        "ruff",         -- python
+        "ruff", -- python
         "markdownlint", -- markdown
         -- utility
-        "isort",  -- python: sort imports 
+        "isort", -- python: sort imports
       },
     },
     config = function(_, opts)
@@ -84,6 +84,9 @@ return {
         cssls = require("plugins.lsp.servers.cssls"),
         jsonls = require("plugins.lsp.servers.jsonls"),
         rust_analyzer = require("plugins.lsp.servers.rust_analyzer"),
+        gopls = require("plugins.lsp.servers.gopls"),
+        emmet_ls = require("plugins.lsp.servers.emmet_ls"),
+        pylsp = require("plugins.lsp.servers.pylsp"),
       },
     },
     config = function(_, opts)

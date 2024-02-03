@@ -71,6 +71,18 @@ return {
     end,
   },
 
+  -- Zen mode
+  {
+    "folke/zen-mode.nvim",
+    event = "VeryLazy",
+    opts = {},
+  },
+  {
+    "folke/twilight.nvim",
+    opts = {},
+  },
+
+  -- key tips
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
